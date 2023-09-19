@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="pl">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<table class="table table-striped">
+    <tr>
+        <td>
+            <h2> Transakcje </h2>
+        </td>
+        <td>
+            <div style="float: right; margin-right: 20px;">
+                <a href="/showWallet" class="btn btn-primary"> Portfel </a>
+            </div>
+        </td>
+        <td>
+            <div style="float: right; margin-right: 20px;">
+                <a href="/showCurrencies" class="btn btn-primary"> Waluty </a>
+            </div>
+        </td>
+        <td>
+            <div style="float: right; margin-right: 20px;">
+                <a href="/addTransactionForm" class="btn btn-primary"> Dodaj transakcje </a>
+            </div>
+        </td>
+    </tr>
+</table>
+<table class="table table-striped">
+    <tr><th> Typ </th><th> Waluta </th><th> Ilosc </th><th> Kwota </th><th> Data </th><th> Kasuj </th><th> Aktualizuj </th></tr>
+    <tr th:each="transaction : ${transactions}">
+        <td th:text="${transaction.type}"></td>
+        <td th:text="${transaction.cryptoCurrency.name}"></td>
+        <td th:text="${transaction.quantity}"></td>
+        <td th:text="${transaction.cost}"></td>
+        <td th:text="${transaction.date}"></td>
+        <td><a href="#" th:href="@{/deleteTransaction(id= ${transaction.id})}" class="btn btn-danger" >
+            <i class="fa fa-trash-o fa-lg" ></i> Kasuj </a>
+        </td>
+        <td>
+            <a href="#" th:href="@{/redirectTransaction(id=${transaction.id})}" class="btn btn-primary" >
+                <i class="fa fa-trash-o fa-lg" ></i> Aktualizuj </a>
+        </td>
+    </tr>
+</table>
+<table class="table table-striped" >
+    <tr><td> Wyszukaj transakcje wg kryptowaluty </td>
+        <td>
+            <form action="http://localhost:8080/search" ><input name="waluta">
+        </td>
+        <td>
+            <input type="submit" value="Wyszukaj" >
+            </form>
+        </td>
+        <td>
+            <div style="float: right; margin-right: 20px;">
+                <a href="/showTransactions" class="btn btn-primary"> Pokaż wszystkie </a>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

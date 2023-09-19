@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="pl">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<table class="table table-striped">
+  <tr>
+    <td>
+      <h2> Portfel </h2>
+    </td>
+    <td>
+      <div style="float: right; margin-right: 20px;">
+        <a href="/showTransactions" class="btn btn-primary"> Transakcje </a>
+      </div>
+    </td>
+    <td>
+      <div style="float: right; margin-right: 20px;">
+        <a href="/showCurrencies" class="btn btn-primary"> Waluty </a>
+      </div>
+    </td>
+  </tr>
+</table>
+<table class="table table-striped">
+  <tr>
+    <th> Waluta </th>
+    <th> Aktualna cena </th>
+    <th> Średnia cena zakupu </th>
+    <th> Suma </th>
+    <th> Koszt </th>
+    <th> Zysk / Strata </th>
+  </tr>
+  <tr th:each="wallet : ${wallets}">
+    <td th:text="${wallet.cryptoCurrency.name}"></td>
+    <td th:text="${wallet.cryptoCurrency.price}"></td>
+    <td th:text="${wallet.avgPrice}"></td>
+    <td th:text="${wallet.totalQuantity}"></td>
+    <td th:text="${wallet.totalCost}"></td>
+    <td th:text="${wallet.profitLoss}" th:class="${wallet.profitLoss lt 0} ? 'text-danger' : (${wallet.profitLoss gt 0} ? 'text-success' : '')"></td>
+  </tr>
+</table>
+</body>
+</html>
